@@ -1,25 +1,24 @@
 import json
 import requests
 from datetime import datetime
-from io import BytesIO
-from PIL import Image
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ContextTypes
+from pyrogram.enums import ButtonStyle  # just imported (UI styling limited)
 
-BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+BOT_TOKEN = "8684382287:AAHmeY-qd19A5VFe2DTJ4edxZKcvDCVoP8A"
 REMOVE_BG_API = "f3Se7SVDqpvsM5TLknPKN6Cz"
 IMGBB_API = "62736b1fc27c5c6bb91063f2ec92913b"
+BOT_USERNAME = "IMAGE_TO_BACKREMOVE_bot"
 
 USERS_FILE = "users.json"
 
-# Load DB
+# Load database
 try:
     with open(USERS_FILE) as f:
         users = json.load(f)
 except:
     users = {}
 
-user_images = {}
 mode = {}
 
 def save():
@@ -40,7 +39,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if uid not in users:
         users[uid] = {"credits": 2, "refs": []}
 
-        # Anti-fake referral
+        # Referral system
         if ref and ref != uid and ref in users:
             if uid not in users[ref]["refs"]:
                 users[ref]["refs"].append(uid)
@@ -49,7 +48,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reset(uid)
     save()
 
-    kb = [
+    keyboard = [
         [InlineKeyboardButton("👥 GROUP", url="https://t.me/+dv_rcq5uIXhmMWM1")],
         [InlineKeyboardButton("🌐 NETWORK", url="https://t.me/+Imyf3M9TO5k1ODRl")],
         [InlineKeyboardButton("🔥 REMOVE BACKGROUND", callback_data="remove")],
@@ -62,29 +61,31 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         photo="https://i.ibb.co/Mk5MnbRY/x.jpg",
         caption="🔥 *Advanced BG Bot*\n\n🎯 Remove BG + Upload Link\n💰 2 credits/day",
         parse_mode="Markdown",
-        reply_markup=InlineKeyboardMarkup(kb)
+        reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
-# REF LINK
+# REFERRAL LINK
 async def ref(update, context):
     q = update.callback_query
     uid = str(q.from_user.id)
-    link = f"https://t.me/YOUR_BOT_USERNAME?start={uid}"
+    link = f"https://t.me/{BOT_USERNAME}?start={uid}"
     await q.answer()
     await q.message.reply_text(f"🔗 Your Referral Link:\n{link}")
 
-# SET MODE
-async def set_upload(update, context):
-    uid = str(update.callback_query.from_user.id)
-    mode[uid] = "upload"
-    await update.callback_query.answer()
-    await update.callback_query.message.reply_text("📤 Send image to upload")
+# MODE SET
+async def set_mode(update, context):
+    q = update.callback_query
+    uid = str(q.from_user.id)
 
-async def set_remove(update, context):
-    uid = str(update.callback_query.from_user.id)
-    mode[uid] = "remove"
-    await update.callback_query.answer()
-    await update.callback_query.message.reply_text("🧠 Send image to remove background")
+    if q.data == "remove":
+        mode[uid] = "remove"
+        await q.answer()
+        await q.message.reply_text("🧠 Send image to remove background")
+
+    elif q.data == "upload":
+        mode[uid] = "upload"
+        await q.answer()
+        await q.message.reply_text("📤 Send image to upload")
 
 # IMAGE HANDLER
 async def handle_photo(update, context):
@@ -99,12 +100,14 @@ async def handle_photo(update, context):
         return await update.message.reply_text("❌ No credits left!")
 
     file = await update.message.photo[-1].get_file()
-    img_bytes = requests.get(file.file_path).content
+    img_url = file.file_path
 
-    # MODE: UPLOAD
+    # UPLOAD MODE
     if mode.get(uid) == "upload":
         users[uid]["credits"] -= 1
         save()
+
+        img_bytes = requests.get(img_url).content
 
         res = requests.post(
             "https://api.imgbb.com/1/upload",
@@ -116,100 +119,30 @@ async def handle_photo(update, context):
         if not data.get("success"):
             return await update.message.reply_text("❌ Upload failed")
 
-        link = data["data"]["url"]
-        return await update.message.reply_text(f"🌐 Your Image Link:\n{link}")
+        return await update.message.reply_text(f"🌐 Your Image Link:\n{data['data']['url']}")
 
-    # MODE: REMOVE BG
+    # REMOVE BACKGROUND
     users[uid]["credits"] -= 1
     save()
 
     res = requests.post(
         "https://api.remove.bg/v1.0/removebg",
-        data={"image_url": file.file_path},
+        data={"image_url": img_url},
         headers={"X-Api-Key": REMOVE_BG_API}
     )
 
     if res.status_code != 200:
         return await update.message.reply_text("❌ BG remove failed")
 
-    user_images[uid] = res.content
-
-    kb = [[
-        InlineKeyboardButton("🔴 RED", callback_data="red"),
-        InlineKeyboardButton("🔵 BLUE", callback_data="blue"),
-        InlineKeyboardButton("⚪ WHITE", callback_data="white"),
-        InlineKeyboardButton("🎨 CUSTOM", callback_data="custom")
-    ]]
-
-    await update.message.reply_photo(res.content, reply_markup=InlineKeyboardMarkup(kb))
-
-# APPLY COLOR
-async def apply_color(update, context):
-    q = update.callback_query
-    uid = str(q.from_user.id)
-    c = q.data
-
-    if uid not in user_images:
-        return await q.answer("Send image first")
-
-    if c == "custom":
-        await q.answer()
-        return await q.message.reply_text("Send HEX color like #ff0000")
-
-    colors = {
-        "red": (255,0,0),
-        "blue": (0,0,255),
-        "white": (255,255,255)
-    }
-
-    fg = Image.open(BytesIO(user_images[uid])).convert("RGBA")
-    bg = Image.new("RGBA", fg.size, colors[c])
-    final = Image.alpha_composite(bg, fg)
-
-    bio = BytesIO()
-    final.save(bio, "PNG")
-    bio.seek(0)
-
-    await q.answer()
-    await q.message.reply_photo(bio)
-
-# CUSTOM COLOR
-async def custom_color(update, context):
-    uid = str(update.effective_user.id)
-    text = update.message.text.strip()
-
-    if not text.startswith("#") or len(text) != 7:
-        return
-
-    try:
-        rgb = tuple(int(text[i:i+2], 16) for i in (1,3,5))
-    except:
-        return
-
-    if uid not in user_images:
-        return
-
-    fg = Image.open(BytesIO(user_images[uid])).convert("RGBA")
-    bg = Image.new("RGBA", fg.size, rgb)
-    final = Image.alpha_composite(bg, fg)
-
-    bio = BytesIO()
-    final.save(bio, "PNG")
-    bio.seek(0)
-
-    await update.message.reply_photo(bio)
+    await update.message.reply_photo(res.content)
 
 # MAIN
 app = ApplicationBuilder().token(BOT_TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CallbackQueryHandler(ref, pattern="ref"))
-app.add_handler(CallbackQueryHandler(set_upload, pattern="upload"))
-app.add_handler(CallbackQueryHandler(set_remove, pattern="remove"))
-app.add_handler(CallbackQueryHandler(apply_color, pattern="red|blue|white|custom"))
-
+app.add_handler(CallbackQueryHandler(set_mode, pattern="remove|upload"))
 app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, custom_color))
 
 print("🚀 Bot running...")
 app.run_polling()
