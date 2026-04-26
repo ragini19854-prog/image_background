@@ -58,11 +58,23 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
 
     await update.message.reply_photo(
-        photo="https://i.ibb.co/Mk5MnbRY/x.jpg",
-        caption="🔥 *Advanced BG Bot*\n\n🎯 Remove BG + Upload Link\n💰 2 credits/day",
-        parse_mode="Markdown",
-        reply_markup=InlineKeyboardMarkup(keyboard)
-    )
+    photo="https://i.ibb.co/Mk5MnbRY/x.jpg",
+    caption=f"""```
+┌────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼──────🔹
+┆◍ ʜєʏ, {update.effective_user.first_name} 🥀
+┆◍ ɪ ᴧϻ {context.bot.first_name}
+└──────────────────────•
+
+✨ I can remove backgrounds & convert images to public links
+💰 You get 2 free credits every day
+
+•──────────────────────•
+⌯ ᴘᴏᴡєʀєᴅ ʙʏ » |𝐌 ᴀ ᴅ ᴀ ʀ ᴀ •|
+•──────────────────────•
+```""",
+    parse_mode="Markdown",
+    reply_markup=InlineKeyboardMarkup(keyboard)
+)
 
 # REFERRAL LINK
 async def ref(update, context):
