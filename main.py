@@ -5,7 +5,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ContextTypes
 from pyrogram.enums import ButtonStyle  # just imported (UI styling limited)
 
-BOT_TOKEN = "8684382287:AAHmeY-qd19A5VFe2DTJ4edxZKcvDCVoP8A"
+BOT_TOKEN = "8684382287:AAE17nfdgrbndBSl1wG9MWmiW9GdeErkTg4"
 REMOVE_BG_API = "f3Se7SVDqpvsM5TLknPKN6Cz"
 IMGBB_API = "62736b1fc27c5c6bb91063f2ec92913b"
 BOT_USERNAME = "IMAGE_TO_BACKREMOVE_bot"
