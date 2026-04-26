@@ -156,5 +156,11 @@ app.add_handler(CallbackQueryHandler(ref, pattern="ref"))
 app.add_handler(CallbackQueryHandler(set_mode, pattern="remove|upload"))
 app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
 
-print("🚀 Bot running...")
-app.run_polling()
+if __name__ == "__main__":
+    try:
+        print("🚀 Bot starting...")
+        app.run_polling()
+    except Exception as e:
+        import traceback
+        print("❌ FULL ERROR:")
+        traceback.print_exc()
