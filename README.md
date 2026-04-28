@@ -1,130 +1,117 @@
-# image_background
-
+💀⚡ MADARA BG REMOVER BOT ⚡💀
+<div align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:1a1a1a,100:000000&height=240&section=header&text=MADARA%20AI%20ENGINE&fontSize=48&fontColor=ff0000&animation=fadeIn&fontAlignY=38&desc=Next-Level%20Telegram%20Automation%20System&descAlignY=60&descSize=18"/> </div>
+<div align="center"> <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=2500&color=FF0000&center=true&vCenter=true&width=800&lines=AI+Background+Remover;Lightning+Fast+Processing;Telegram+Automation+System;Referral+Powered+Growth;Built+By+Madara" /> </div>
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0c29,50:302b63,100:24243e&height=220&section=header&text=💀%20MADARA%20BG%20REMOVER%20BOT%20⚡&fontSize=42&fontColor=ff0000&animation=fadeIn&fontAlignY=35&desc=Ultimate%20Telegram%20Automation%20System&descAlignY=55&descSize=18"/>
+
+
+
+
+
+
 
 </div>
+🚀 LIVE PREVIEW
+<div align="center"> <img src="https://i.ibb.co/bRr9nN7L/x.jpg" width="420"/> <img src="https://i.ibb.co/v6C6q6WG/x.jpg" width="420"/> </div>
+🧠 WHAT IS THIS?
 
----
+MADARA BG REMOVER BOT is a high-performance Telegram automation system that allows users to:
 
-<div align="center">
+Remove image backgrounds using AI
+Convert images into public shareable links
+Earn credits via referral system
+Experience smooth, fast UI inside Telegram
+⚡ CORE FEATURES
+🧠 AI BACKGROUND REMOVAL
+🎯 Pixel-perfect edge detection
+⚡ Ultra-fast response time
+🔥 Production-ready API integration
+🌐 IMAGE → PUBLIC LINK
+Instant upload
+Direct CDN link
+Perfect for sharing
+🎨 COLOR ENGINE
+🔴 Red
+🔵 Blue
+⚪ White
+🎨 Custom HEX support
+💰 SMART CREDIT SYSTEM
+🎁 2 free uses/day
+🔗 Referral rewards
+🔄 Auto-reset system
+🛡️ ANTI-ABUSE SYSTEM
+❌ No fake referrals
+❌ Duplicate prevention
+✅ Secure validation
+🧩 SYSTEM ARCHITECTURE
+⚙️ QUICK DEPLOY (1-CLICK)
+🚀 Deploy on Render
 
-<img src="https://i.ibb.co/bRr9nN7L/x.jpg" width="500" style="border:4px solid #ff0000; border-radius:18px; box-shadow:0 0 25px red;"/>
+🚀 Deploy on Railway
 
-<br><br>
+⚙️ LOCAL SETUP
+1️⃣ Clone Repo
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
+2️⃣ Install Dependencies
+pip install -r requirements.txt
+3️⃣ Configure Environment
 
-<img src="https://i.ibb.co/v6C6q6WG/x.jpg" width="500" style="border:4px solid #00ffff; border-radius:18px; box-shadow:0 0 25px cyan;"/>
+Create .env file:
 
-</div>
-
----
-
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=2500&color=FF0000&center=true&vCenter=true&width=700&lines=AI+Background+Remover;Image+to+Public+Link;Smart+Credit+System;Referral+Engine;Powered+By+Madara" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/STATUS-ONLINE-success?style=for-the-badge&logo=telegram">
-  <img src="https://img.shields.io/badge/SPEED-FAST-red?style=for-the-badge">
-  <img src="https://img.shields.io/badge/AI-ACTIVE-blue?style=for-the-badge">
-  <img src="https://img.shields.io/badge/POWER-MADARA-black?style=for-the-badge">
-</p>
-
----
-
-# 💀⚡ MADARA BG REMOVER BOT ⚡💀
-
-## 🚀 FEATURES
-
-### 🧠 AI BACKGROUND REMOVER
-- Ultra fast processing ⚡  
-- Clean edge detection 🎯  
-
-### 🌐 IMAGE → LINK
-- Instant upload  
-- Shareable public URL  
-
-### 🎨 COLOR ENGINE
-- 🔴 Red  
-- 🔵 Blue  
-- ⚪ White  
-- 🎨 Custom HEX (`#ff0000`)  
-
-### 💰 CREDIT SYSTEM
-- 🎁 2 free uses per day  
-- 🔗 1 referral = +1 credit  
-- 🔄 Auto reset daily  
-
-### 🛡️ ANTI-FAKE REFERRAL
-- ❌ No self-referral  
-- ❌ No duplicate reward  
-- ✅ Real users only  
-
----
-
-## 🧩 SYSTEM FLOW
-
-```mermaid
-flowchart TD
-A[User] --> B{Select Mode}
-B -->|Remove BG| C[AI Engine]
-B -->|Upload| D[Img Upload]
-C --> E[Return Image]
-D --> F[Return Link]
-
----
-
-⚙️ INSTALL
-
-pip install python-telegram-bot requests pillow
-
----
-
-🔧 CONFIG
-
-BOT_TOKEN = "YOUR_TOKEN"
-REMOVE_BG_API = "YOUR_API"
-IMGBB_API = "YOUR_API"
-BOT_USERNAME = "YOUR_USERNAME"
-
----
-
-▶️ RUN
-
+BOT_TOKEN=your_token
+REMOVE_BG_API=your_api
+IMGBB_API=your_api
+BOT_USERNAME=your_bot_username
+4️⃣ Run Bot
 python bot.py
+🎮 BOT INTERFACE
+🔥 MADARA AI BOT
 
----
-
-🎮 LIVE UI
-
-🔥 MADARA BOT
-
-🎯 Remove BG + Upload
-💰 2 credits/day
+🎯 Remove BG
+🌐 Image → Link
+💰 Credits: 2/day
 
 [ 🧠 REMOVE BG ]
-[ 🌐 IMAGE LINK ]
-[ 🔗 REFERRAL ]
-
----
-
+[ 🌐 UPLOAD IMAGE ]
+[ 🔗 REFERRAL SYSTEM ]
+📂 PROJECT STRUCTURE
+📁 project/
+ ├── bot.py
+ ├── config.json
+ ├── users.json
+ ├── clones.json
+ ├── clone_data/
+ └── requirements.txt
 🧠 TECH STACK
-
-- Python 🐍
-- Telegram Bot API 🤖
-- AI Processing Engine
-- Image Hosting API
-
----
-
+🐍 Python
+🤖 Telegram Bot API
+🎯 Remove.bg API
+🌐 ImgBB API
+⚡ Async Processing
+📊 PERFORMANCE
+Feature	Speed
+BG Removal	⚡ Fast
+Upload	🚀 Instant
+API Response	🔥 Optimized
 🧑‍💻 DEVELOPER
 
-Madara
+MADARA ⚡
 🔗 https://t.me/YOUR_MADARA_BRO
 
----
+❤️ SUPPORT
 
+If you like this project:
+
+⭐ Star the repo
+🍴 Fork it
+📢 Share with others
+
+🛠️ FUTURE UPDATES
+🎥 Video background remover
+🤖 AI enhancement tools
+☁️ Cloud storage system
+💎 Premium plan system
+<div align="center">
 ⚡💀 POWERED BY MADARA 💀⚡
-�
-￼
+</div>
